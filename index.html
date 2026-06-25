@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1" />
+  <meta name="theme-color" content="#6d28d9" />
+  <title>Gynéco-Quest 🎮</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ TOP BAR ============ -->
+  <header id="topbar">
+    <div class="tb-left" onclick="Game.go('home')">
+      <span class="logo">🧬</span><span class="logo-txt">Gynéco-Quest</span>
+    </div>
+    <div class="tb-right">
+      <div class="stat-chip" title="Série en cours">🔥 <span id="tb-streak">0</span></div>
+      <div class="stat-chip" title="Niveau">⭐ <span id="tb-level">1</span></div>
+    </div>
+  </header>
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="screen active">
+    <div class="hero">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 120 120" class="ring">
+          <circle cx="60" cy="60" r="52" class="ring-bg"/>
+          <circle cx="60" cy="60" r="52" class="ring-fg" id="xpRing"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-level" id="homeLevel">1</div>
+          <div class="ring-label">niveau</div>
+        </div>
+      </div>
+      <div class="hero-info">
+        <div id="homeTitle" class="hero-title">Interne débutant</div>
+        <div class="xp-line"><span id="homeXp">0</span> XP — plus que <span id="homeXpNext">100</span> pour le niveau suivant</div>
+        <div class="mini-stats">
+          <div><b id="homeMastered">0</b><span>maîtrisées</span></div>
+          <div><b id="homeSeen">0</b><span>vues</span></div>
+          <div><b id="homeTotal">0</b><span>au total</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily goal -->
+    <div class="daily card-soft">
+      <div class="daily-head">
+        <span>🎯 Objectif du jour</span>
+        <span id="dailyCount">0 / 30</span>
+      </div>
+      <div class="bar"><div class="bar-fill" id="dailyBar"></div></div>
+      <div class="daily-sub" id="dailyMsg">Réponds à 30 cartes aujourd'hui pour garder la flamme 🔥</div>
+    </div>
+
+    <!-- Modes -->
+    <h2 class="sec-title">Modes de jeu</h2>
+    <div class="mode-grid">
+      <button class="mode-btn primary" onclick="Game.startReview('due')">
+        <span class="mode-emoji">🃏</span>
+        <span class="mode-name">Révision intelligente</span>
+        <span class="mode-desc">Répétition espacée — <span id="dueCount">0</span> cartes à revoir</span>
+      </button>
+      <button class="mode-btn" onclick="Game.startQuiz()">
+        <span class="mode-emoji">⚡</span>
+        <span class="mode-name">Quiz éclair</span>
+        <span class="mode-desc">QCM rapide, points bonus</span>
+      </button>
+      <button class="mode-btn" onclick="Game.startBlitz()">
+        <span class="mode-emoji">⏱️</span>
+        <span class="mode-name">Blitz 60 s</span>
+        <span class="mode-desc">Combien en 1 minute ?</span>
+      </button>
+      <button class="mode-btn" onclick="Game.go('cats')">
+        <span class="mode-emoji">🗂️</span>
+        <span class="mode-name">Par chapitre</span>
+        <span class="mode-desc">Boss de chapitre à vaincre</span>
+      </button>
+    </div>
+
+    <div class="row2">
+      <button class="ghost-btn" onclick="Game.go('plan')">🗺️ Plan d'attaque du week-end</button>
+      <button class="ghost-btn" onclick="Game.go('badges')">🏅 Mes trophées</button>
+    </div>
+    <button class="reset-link" onclick="Game.resetConfirm()">↺ Réinitialiser ma progression</button>
+  </section>
+
+  <!-- ============ CATEGORIES ============ -->
+  <section id="cats" class="screen">
+    <button class="back" onclick="Game.go('home')">← Accueil</button>
+    <h2 class="sec-title">Chapitres</h2>
+    <p class="hint">Choisis un chapitre pour l'affronter. Atteins 100 % pour vaincre le boss 👑</p>
+    <div id="catList" class="cat-list"></div>
+  </section>
+
+  <!-- ============ PLAN ============ -->
+  <section id="plan" class="screen">
+    <button class="back" onclick="Game.go('home')">← Accueil</button>
+    <h2 class="sec-title">🗺️ Plan d'attaque — 3 jours</h2>
+    <div id="planContent" class="plan"></div>
+  </section>
+
+  <!-- ============ BADGES ============ -->
+  <section id="badges" class="screen">
+    <button class="back" onclick="Game.go('home')">← Accueil</button>
+    <h2 class="sec-title">🏅 Trophées</h2>
+    <div id="badgeList" class="badge-list"></div>
+  </section>
+
+  <!-- ============ PLAY (flashcards) ============ -->
+  <section id="play" class="screen">
+    <div class="play-top">
+      <button class="back small" onclick="Game.quitPlay()">✕</button>
+      <div class="play-progress"><div class="bar"><div class="bar-fill" id="playBar"></div></div></div>
+      <div class="combo" id="comboBox">🔥 ×1</div>
+    </div>
+
+    <div class="card-stage">
+      <div class="flashcard" id="flash">
+        <div class="fc-cat" id="fcCat"></div>
+        <div class="fc-q" id="fcQ"></div>
+        <div class="fc-answer" id="fcA" hidden>
+          <div class="fc-a-body" id="fcABody"></div>
+          <div class="fc-mnemo" id="fcMnemo" hidden></div>
+        </div>
+        <div class="fc-tap" id="fcTap">👆 Touche pour révéler la réponse</div>
+      </div>
+    </div>
+
+    <div class="grade-row" id="gradeRow" hidden>
+      <button class="grade fail" onclick="Game.grade(0)">😵<small>Raté</small></button>
+      <button class="grade meh" onclick="Game.grade(1)">😐<small>Presque</small></button>
+      <button class="grade good" onclick="Game.grade(2)">😎<small>Je savais !</small></button>
+    </div>
+    <button class="reveal-btn" id="revealBtn" onclick="Game.reveal()">Révéler la réponse</button>
+  </section>
+
+  <!-- ============ QUIZ (MCQ) ============ -->
+  <section id="quiz" class="screen">
+    <div class="play-top">
+      <button class="back small" onclick="Game.quitPlay()">✕</button>
+      <div class="play-progress"><div class="bar"><div class="bar-fill" id="quizBar"></div></div></div>
+      <div class="combo" id="quizCombo">🔥 ×1</div>
+    </div>
+    <div class="quiz-prompt" id="quizPrompt"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+  </section>
+
+  <!-- ============ SUMMARY ============ -->
+  <section id="summary" class="screen">
+    <div class="summary-card">
+      <div class="summary-emoji" id="sumEmoji">🎉</div>
+      <h2 id="sumTitle">Session terminée !</h2>
+      <div class="summary-stats">
+        <div><b id="sumCorrect">0</b><span>réussies</span></div>
+        <div><b id="sumXp">0</b><span>XP gagnés</span></div>
+        <div><b id="sumStreak">0</b><span>meilleure série</span></div>
+      </div>
+      <div id="sumMsg" class="summary-msg"></div>
+      <button class="mode-btn primary big" onclick="Game.go('home')">Continuer</button>
+    </div>
+  </section>
+
+  <!-- FX layers -->
+  <div id="confetti"></div>
+  <div id="toast"></div>
+  <div id="levelup" class="levelup">
+    <div class="levelup-inner">
+      <div class="lu-star">⭐</div>
+      <div class="lu-title">NIVEAU <span id="luLevel">2</span> !</div>
+      <div class="lu-sub" id="luSub"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

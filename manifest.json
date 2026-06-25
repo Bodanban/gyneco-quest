@@ -1,0 +1,14 @@
+{
+  "name": "Gynéco-Quest",
+  "short_name": "GynécoQuest",
+  "description": "Réviser la gynéco-obstétrique en jouant — répétition espacée + gamification.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0a1e",
+  "theme_color": "#6d28d9",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
