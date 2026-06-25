@@ -110,7 +110,10 @@ body{
 .fc-a-body{font-size:16px;line-height:1.55;white-space:pre-wrap;color:#e9e2ff}
 .fc-mnemo{margin-top:14px;background:linear-gradient(135deg,#3a2a00,#4a3500);border:1px solid #6b4e00;
   border-radius:12px;padding:10px 12px;font-size:14px;font-weight:700;color:var(--gold)}
-.fc-mnemo:before{content:"🧠 Astuce : ";color:#ffd866}
+.fc-mnemo:before{content:"🧠 Moyen mnémo : ";color:#ffd866}
+.fc-tip{margin-top:12px;background:linear-gradient(135deg,#06281e,#0a3a2a);border:1px solid #15803d;
+  border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.5;font-weight:600;color:#86efac}
+.fc-tip:before{content:"💡 Pour retenir : ";color:#4ade80;font-weight:800}
 .fc-tap{margin-top:auto;text-align:center;color:var(--muted);font-size:13px;padding-top:18px}
 
 .reveal-btn{width:100%;margin-top:16px;padding:18px;border:none;border-radius:16px;

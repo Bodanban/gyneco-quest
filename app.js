@@ -169,6 +169,8 @@ const Game = (() => {
     document.getElementById("fcABody").textContent = card.a;
     const mn = document.getElementById("fcMnemo");
     if(card.mnemo){ mn.hidden=false; mn.textContent = card.mnemo; } else mn.hidden=true;
+    const tp = document.getElementById("fcTip2");
+    if(card.tip){ tp.hidden=false; tp.textContent = card.tip; } else tp.hidden=true;
     document.getElementById("fcA").hidden = true;
     document.getElementById("fcTap").hidden = false;
     document.getElementById("gradeRow").hidden = true;
