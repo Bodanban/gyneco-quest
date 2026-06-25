@@ -50,6 +50,15 @@ les 4 techniques d'apprentissage les plus prouvées :
 cerveau retient bien mieux ce qui est **récompensé sur le moment**. C'est le ressort qui rend
 la révision « accro » au lieu de pénible.
 
+### 📚 Chaque carte a 3 couches d'apprentissage
+1. **La réponse du cours** (texte du document, inchangée) — ce que tu dois réciter à l'examen.
+2. **💡 Pour retenir** — une astuce mémoire (image, acronyme, ancrage de chiffres) sur **les 183 cartes**.
+3. **🧠 Comprendre en simple (+)** — un bouton qui déplie une **explication longue et simplifiée**
+   (« En clair ») pour vraiment *comprendre* le mécanisme, pas juste réciter. Présent sur **les 183 cartes**.
+
+Idée : tu lis la réponse du cours, tu retiens grâce à l'astuce, et si ça ne « clique » pas,
+tu ouvres le **+** pour comprendre en profondeur. Comprendre = retenir sans forcer.
+
 ### ⏱️ Comment réviser concrètement
 - Des **sessions de 10 minutes**, plusieurs fois par jour, valent mieux qu'une longue séance.
 - Garde ta **flamme 🔥 quotidienne** (objectif : 30 cartes/jour).
