@@ -171,12 +171,23 @@ const Game = (() => {
     if(card.mnemo){ mn.hidden=false; mn.textContent = card.mnemo; } else mn.hidden=true;
     const tp = document.getElementById("fcTip2");
     if(card.tip){ tp.hidden=false; tp.textContent = card.tip; } else tp.hidden=true;
+    const ex = document.getElementById("fcExplain");
+    const exBtn = document.getElementById("explainBtn");
+    ex.hidden = true; ex.textContent = card.explain || "";
+    if(card.explain){ exBtn.hidden=false; exBtn.textContent="🧠 Comprendre en simple (+)"; } else exBtn.hidden=true;
     document.getElementById("fcA").hidden = true;
     document.getElementById("fcTap").hidden = false;
     document.getElementById("gradeRow").hidden = true;
     document.getElementById("revealBtn").hidden = false;
     document.getElementById("playBar").style.width = (100*s.idx/s.total)+"%";
     updateCombo("comboBox", s.combo);
+  }
+  function toggleExplain(){
+    const ex = document.getElementById("fcExplain");
+    const btn = document.getElementById("explainBtn");
+    ex.hidden = !ex.hidden;
+    btn.textContent = ex.hidden ? "🧠 Comprendre en simple (+)" : "🧠 Masquer l'explication (−)";
+    beep("flip");
   }
   function reveal(){
     document.getElementById("fcA").hidden = false;
@@ -458,5 +469,5 @@ const Game = (() => {
     }
   });
 
-  return { go, startReview, startQuiz, startBlitz, reveal, grade, quitPlay, resetConfirm };
+  return { go, startReview, startQuiz, startBlitz, reveal, grade, quitPlay, resetConfirm, toggleExplain };
 })();

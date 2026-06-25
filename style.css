@@ -114,6 +114,12 @@ body{
 .fc-tip{margin-top:12px;background:linear-gradient(135deg,#06281e,#0a3a2a);border:1px solid #15803d;
   border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.5;font-weight:600;color:#86efac}
 .fc-tip:before{content:"💡 Pour retenir : ";color:#4ade80;font-weight:800}
+.explain-toggle{margin-top:14px;width:100%;background:#162a4d;border:1px solid #2c63b8;color:#93c5fd;
+  border-radius:12px;padding:13px;font-size:14px;font-weight:800;cursor:pointer;transition:transform .1s}
+.explain-toggle:active{transform:scale(.98)}
+.fc-explain{margin-top:10px;background:#0d1b33;border:1px solid #244a87;border-radius:12px;
+  padding:14px;font-size:15px;line-height:1.65;color:#dbeafe;animation:fade .3s}
+.fc-explain:before{content:"🧠 En clair : ";color:#60a5fa;font-weight:800;display:block;margin-bottom:6px}
 .fc-tap{margin-top:auto;text-align:center;color:var(--muted);font-size:13px;padding-top:18px}
 
 .reveal-btn{width:100%;margin-top:16px;padding:18px;border:none;border-radius:16px;
